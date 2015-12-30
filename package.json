@@ -5,7 +5,8 @@
   "main": "babel.server.js",
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
-    "serve": "node --harmony ./babel.server"
+    "serve": "node --harmony ./babel.server",
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },
   "repository": {
     "type": "git",

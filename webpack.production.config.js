@@ -1,16 +1,13 @@
-module.exports = {
-  context: __dirname + "/app",
+var path = require('path');
+var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
+var config = {
   entry: {
-    javascript: "./app.js",
-    html: "./index.html"
+    javascript: path.resolve(__dirname, 'app/app.js')
   },
-
-  devtool: "eval-source-map",
-
   output: {
-    filename: "app.js",
-    path: __dirname + "/dist",
+    path: path.resolve(__dirname, 'dist'),
+    filename: "app.js"
   },
   module: {
     loaders: [
@@ -33,4 +30,6 @@ module.exports = {
       }
     ]
   }
-}
+};
+
+module.exports = config;

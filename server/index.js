@@ -2,8 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
 import SocketIo from 'socket.io';
-import { createStore } from 'redux';
-import reducer from "../reducers/index";
 import session from 'express-session';
 
 const hostname = process.env.HOSTNAME || "localhost";
@@ -11,7 +9,6 @@ const port     = process.env.PORT || 8000;
 const app      = express();
 const server   = http.Server(app);
 const io       = SocketIo(server);
-const store = createStore(reducer);
 
 const allowCrossDomain = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080');

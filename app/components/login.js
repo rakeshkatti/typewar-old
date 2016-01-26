@@ -1,12 +1,12 @@
-import React from "react";
+import React, { Component } from "react";
 import {renderContainer} from "./renderContainer";
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      username:""
-    }
-  },
+export default class extends Component {
+  constructor() {
+    super();
+    this.state = {username: ""};
+  }
+
   login() {
     let request = new XMLHttpRequest();
     let username = this.state.username;
@@ -31,16 +31,18 @@ export default React.createClass({
     request.onerror = (error) => {
       console.log(error);
     }
-  },
+  }
+
   handleChange(event) {
     this.setState({username: event.target.value});
-  },
+  }
+
   render() {
     return (
       <div>
-      <input value={this.state.username} onChange={this.handleChange} />
-      <button onClick={this.login}>Login</button>
+      <input value={this.state.username} onChange={this.handleChange.bind(this)} />
+      <button onClick={this.login.bind(this)}>Login</button>
       </div>
     );
   }
-});
+};

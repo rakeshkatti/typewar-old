@@ -1,5 +1,7 @@
+import { splitTheWord } from "../utils/utils"
+
 let defaultState = {
-		onScreen: [],
+		onScreen: {},
 		typed: {
 			none: []
 		}
@@ -47,10 +49,16 @@ const addUser = (typed, username) => {
 	});
 }
 
-const addOnScreen = (onScreen = [], word) => {
-	return [...onScreen, word];
+const addOnScreen = (onScreen = {}, word) => {
+	let splitWord = {};
+	splitTheWord(word).map((item) => {splitWord[item] = 1})
+	return Object.assign(onScreen, {
+		[word]:splitWord
+	});
 }
 
-const removeFromScreen = (onScreen = [], word) => {
-	return onScreen.filter((item) => item !== word)
+const removeFromScreen = (onScreen = {}, word) => {
+	let onScreenTemp = onScreen;
+	 delete onScreenTemp[Object.keys(onScreen).filter((item) => item == word)]
+	 return onScreenTemp;
 }

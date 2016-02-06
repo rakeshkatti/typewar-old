@@ -4,10 +4,13 @@ import ReactDOM from "react-dom";
 import reducer from "../reducers/index";
 import { compose, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
 const renderContainer = () => {
 	ReactDOM.render(
-	<Container store={store} />,
+		<Provider store={store}>
+			<Container />
+		</Provider>,
 	document.getElementById('container')
 	);
 }

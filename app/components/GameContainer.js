@@ -14,8 +14,25 @@ export default class GameContainer extends Component {
   }
 
   keyPressed(e) {
+    e.preventDefault();
+    const { store } = this.context;
+    const state = store.getState();
+    const letters = state.letters;
+    const words = state.words;
+    const buffer = state.buffer;
+    const wordTyped = buffer[this.username].word;
     const characterTyped = String.fromCharCode(e.keyCode)
-    store.dispatch({type:"ADD_CHARACTER", character:characterTyped, username: this.username})
+    const currentWord = wordTyped + characterTyped;
+    if(letters[currentWord]) {
+        store.dispatch({type:"ADD_CHARACTER", character:characterTyped, username: this.username})
+        if(words.onScreen[currentWord]) {
+          store.dispatch({type:"REMOVE_FROM_SCREEN", word:currentWord})
+          store.dispatch({type:"COMPLETED_WORD", word:currentWord, username: this.username});
+        }
+    } else {
+      store.dispatch({type:"REMOVE_FROM_BUFFER", username: this.username})
+      store.dispatch({type:"ADD_CHARACTER", character:characterTyped, username: this.username})
+    }
   }
 
   render() {

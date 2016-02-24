@@ -1,3 +1,6 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+
 module.exports = {
   context: __dirname + "/app",
 
@@ -10,15 +13,19 @@ module.exports = {
 
   output: {
     filename: "app.js",
-    path: __dirname + "/dist",
+    path: path.resolve(__dirname, './dist'),
   },
   module: {
     loaders: [
-    {
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loaders: ["react-hot", "babel-loader"],
-    },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loaders: ["react-hot", "babel-loader"]
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      },
       {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
@@ -32,5 +39,9 @@ module.exports = {
         loader: "file?name=[name].[ext]",
       }
     ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.scss'],
+    modulesDirectories: ['app', 'node_modules']
   }
 }

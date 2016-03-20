@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import "../stylesheets/common.scss";
+
 export default class CharacterComponent extends Component {
   componentWillMount() {
     this.username = localStorage.getItem("username");
   }
-  
+
   render() {
     const { store } = this.context;
     const state = store.getState();
@@ -20,7 +22,9 @@ export default class CharacterComponent extends Component {
     const wordTyped = buffer.word;
 
     return (
-      <span className={wordsOnScreen[word][wordTyped] && lettersTyped[splitWord] ? 'typed' : ''} >
+      <span className={wordsOnScreen[word][wordTyped] && lettersTyped[splitWord]
+        ? 'typed character'
+        : 'character'} >
         {this.props.character}
       </span>
     )

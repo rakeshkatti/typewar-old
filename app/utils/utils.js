@@ -1,5 +1,5 @@
 const splitTheWord = (word) => {
-	word = word ? word : "hello"
+	word = word ? word : "hello";
 	word = word.toUpperCase();
 	let wordArray = word.split(""), newWordArray = [], buffer = "";
 	wordArray.map((character) => {
@@ -7,6 +7,6 @@ const splitTheWord = (word) => {
 		newWordArray.push(buffer);
 	});
 	return newWordArray;
-}
+};
 
 export { splitTheWord }

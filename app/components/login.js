@@ -12,7 +12,7 @@ export default class extends Component {
     let username = this.state.username;
     let data = {
       username: this.state.username
-    }
+    };
     request.open('POST', 'http://localhost:8000/login');
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify(data));
@@ -27,7 +27,7 @@ export default class extends Component {
         renderContainer();
         console.log(response);
       }
-    }
+    };
     request.onerror = (error) => {
       console.log(error);
     }

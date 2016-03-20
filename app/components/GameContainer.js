@@ -42,7 +42,7 @@ export default class GameContainer extends Component {
       <div>
         {Object.keys(state.words.onScreen).map((word, i) => {
           return (
-            <div key = {i}>
+            <div key={i}>
               <WordOnScreen word={word} />
             </div>
           )
@@ -54,4 +54,4 @@ export default class GameContainer extends Component {
 
 GameContainer.contextTypes = {
 	store: React.PropTypes.object
-}
+};

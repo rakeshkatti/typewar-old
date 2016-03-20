@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class extends Component {
   render() {
     return (
-      <h1>Header</h1>
+      <h1>Typewar</h1>
     )
   }
 }

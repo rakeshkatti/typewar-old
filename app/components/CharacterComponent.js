@@ -17,20 +17,25 @@ export default class CharacterComponent extends Component {
     const word = props.word;
     const splitWord = props.splitWord;
 
-    const buffer = state.buffer[this.username];
-    const lettersTyped = buffer.letters;
-    const wordTyped = buffer.word;
+    let  className = "character";
+    state.users.forEach((user, i) => {
+      let buffer = state.buffer[user];
+      let lettersTyped = buffer.letters;
+      let wordTyped = buffer.word;
+      if (wordsOnScreen[word][wordTyped] && lettersTyped[splitWord]) {
+        className += " user" + parseInt(i);
+      }
+    });
 
     return (
-      <span className={wordsOnScreen[word][wordTyped] && lettersTyped[splitWord]
-        ? 'typed character'
-        : 'character'} >
+        <span className={className} >
         {this.props.character}
       </span>
     )
+
   }
 }
 
 CharacterComponent.contextTypes = {
 	store: React.PropTypes.object
-}
+};

@@ -9,7 +9,7 @@ module.exports = {
     html: "./index.html"
   },
 
-  devtool: "eval-source-map",
+  devtool: "#eval-source-map",
 
   output: {
     filename: "app.js",

@@ -38,9 +38,10 @@ export default class extends Component {
     }
 
     render() {
+        let handleChange = this.handleChange.bind(this);
         return (
             <div>
-                <input value={this.state.username} onChange={this.handleChange.bind(this)}/>
+                <input value={this.state.username} onChange={handleChange}/>
                 <button onClick={this.login.bind(this)}>Login</button>
             </div>
         );

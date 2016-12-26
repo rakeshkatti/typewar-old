@@ -66,7 +66,6 @@ io.on('connection', function (socket) {
     socket.emit('send', {message: 'World'});
 
     socket.on('startGame', (data) => {
-        console.log(socket.rooms);
         if (rooms.length > 0) {
             let room = rooms.shift();
             socket.rooms = [];
@@ -80,6 +79,9 @@ io.on('connection', function (socket) {
                 });
             });
         } else {
+            //Only one guy in the room
+            io.sockets.in(socket.rooms[0]).emit('receive', {content: dispatcher});
+            socket.emit('receive', {content: {type:"WAITING_FOR_USER"}})
             rooms.push({socketId:socket.rooms[0], userId: data.userId});
         }
     });

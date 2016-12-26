@@ -8,15 +8,16 @@ export default class WordOnScreen extends Component {
         let splitWord = "";
         return (
             <span>
-        {this.props.word.split("").map((character, i) => {
-            splitWord += character;
-            return (
-                <span key={i} className={splitWord}>
-            <CharacterComponent word={this.props.word} splitWord={splitWord} character={character}/>
-          </span>
-            )
-        })}
-      </span>
+            {
+                this.props.word.split("").map((character, i) => {
+                splitWord += character;
+                return (
+                    <span key={i} className={splitWord}>
+                    <CharacterComponent word={this.props.word} splitWord={splitWord} character={character}/>
+                    </span>
+                )})
+            }
+            </span>
         )
     }
 }

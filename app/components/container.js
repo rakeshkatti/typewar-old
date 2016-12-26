@@ -30,7 +30,7 @@ export default class Container extends Component {
 
         this.unsubscribe = store.subscribe(() => this.forceUpdate());
         var self = this;
-        var fbButton = document.getElementById('fb');
+        var fbButton = document.getElementById('googleLogin');
         var ref = new Firebase("https://typewar.firebaseio.com");
 
         fbButton.addEventListener('click', (e) => {
@@ -148,9 +148,12 @@ export default class Container extends Component {
         return (
             <div>
                 <Header />
-                <button id="fb">fb login</button>
+                <button id="googleLogin">google login</button>
                 <button id="logout">logout</button>
+
                 <p>Session: {localStorage.getItem("username")}</p>
+
+
                 <MainContainer />
                 <Login />
                 <Footer />

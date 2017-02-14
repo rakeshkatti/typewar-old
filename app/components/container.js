@@ -30,10 +30,10 @@ export default class Container extends Component {
 
         this.unsubscribe = store.subscribe(() => this.forceUpdate());
         var self = this;
-        var fbButton = document.getElementById('googleLogin');
+        var googleLogin = document.getElementById('googleLogin');
         var ref = new Firebase("https://typewar.firebaseio.com");
 
-        fbButton.addEventListener('click', (e) => {
+        googleLogin.addEventListener('click', (e) => {
             ref.authWithOAuthPopup("google", function (error, authData) {
                 if (error) {
                     console.log("Login Failed!", error);
@@ -56,37 +56,11 @@ export default class Container extends Component {
                 // use them in Security and Firebase Rules, and show profiles
                 ref.child("users").child(authData.uid).set({
                     provider: authData.provider,
-                    name: getName(authData),
-                    email: getEmail(authData)
+                    name: authData.google.displayName,
+                    email: authData.google.email
                 });
             }
         });
-        // find a suitable name based on the meta info given by each provider
-        function getName(authData) {
-            switch (authData.provider) {
-                case 'password':
-                    return authData.password.email.replace(/@.*/, '');
-                case 'twitter':
-                    return authData.twitter.displayName;
-                case 'facebook':
-                    return authData.facebook.displayName;
-                case 'google':
-                    return authData.google.displayName;
-            }
-        }
-
-        function getEmail(authData) {
-            switch (authData.provider) {
-                case 'password':
-                    return authData.password.email;
-                case 'twitter':
-                    return authData.twitter.email;
-                case 'facebook':
-                    return authData.facebook.email;
-                case 'google':
-                    return authData.google.email;
-            }
-        }
 
         var logoutBtn = document.getElementById('logout');
         logoutBtn.addEventListener('click', (e) => {

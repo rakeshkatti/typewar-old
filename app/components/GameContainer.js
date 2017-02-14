@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import WordOnScreen from "./WordOnScreen";
 import PreGameComponent from "./PreGameComponent";
 import io from "socket.io-client";
@@ -6,28 +6,33 @@ import io from "socket.io-client";
 var socket = io('http://localhost:8000');
 
 export default class GameContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.keyPressed = this.keyPressed.bind(this);
+    }
+    
     componentDidMount() {
         const {store} = this.context;
         this.unsubscribe = store.subscribe(() => this.forceUpdate());
-        window.addEventListener('keydown', this.keyPressed.bind(this));
+        window.addEventListener('keydown', this.keyPressed);
         this.username = localStorage.getItem("username");
     }
-
+    
     componentWillUnmount() {
         this.unsubscribe();
-        window.removeEventListener('keydown', this.keyPressed.bind(this));
+        window.removeEventListener('keydown', this.keyPressed);
     }
-
+    
     keyPressed(e) {
         e.preventDefault();
         const {store} = this.context;
-        const state = store.getState();
-        const letters = state.letters;
-        const words = state.words;
-        const buffer = state.buffer;
-        const wordTyped = buffer[this.username].word;
+        const state          = store.getState();
+        const letters        = state.letters;
+        const words          = state.words;
+        const buffer         = state.buffer;
+        const wordTyped      = buffer[this.username].word;
         const characterTyped = String.fromCharCode(e.keyCode);
-        const currentWord = wordTyped + characterTyped;
+        const currentWord    = wordTyped + characterTyped;
         if (letters[currentWord]) {
             let dispatcher = {type: "ADD_CHARACTER", character: characterTyped, username: this.username};
             store.dispatch(dispatcher);
@@ -45,7 +50,7 @@ export default class GameContainer extends Component {
             store.dispatch({type: "ADD_CHARACTER", character: characterTyped, username: this.username})
         }
     }
-
+    
     render() {
         const {store} = this.context;
         const state = store.getState();

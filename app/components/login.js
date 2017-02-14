@@ -5,6 +5,8 @@ export default class extends Component {
     constructor() {
         super();
         this.state = {username: ""};
+        this.handleChange = this.handleChange.bind(this);
+        this.login = this.login.bind(this);
     }
 
     login() {
@@ -38,11 +40,10 @@ export default class extends Component {
     }
 
     render() {
-        let handleChange = this.handleChange.bind(this);
         return (
             <div>
-                <input value={this.state.username} onChange={handleChange}/>
-                <button onClick={this.login.bind(this)}>Login</button>
+                <input value={this.state.username} onChange={this.handleChange}/>
+                <button onClick={this.login}>Login</button>
             </div>
         );
     }

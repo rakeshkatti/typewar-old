@@ -80,8 +80,8 @@ io.on('connection', function (socket) {
             });
         } else {
             //Only one guy in the room
-            io.sockets.in(socket.rooms[0]).emit('receive', {content: dispatcher});
-            socket.emit('receive', {content: {type:"WAITING_FOR_USER"}})
+            // io.sockets.in(socket.rooms[0]).emit('receive', {content: dispatcher});
+            // socket.emit('receive', {content: {type:"WAITING_FOR_USER"}})
             rooms.push({socketId:socket.rooms[0], userId: data.userId});
         }
     });
